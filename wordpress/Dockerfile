@@ -1,5 +1,5 @@
 # docker-hubからOSのイメージ引込
-FROM centos:centos8.1.1911
+FROM centos:latest
 
 # サーバの日付合わせ
 RUN /bin/cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
@@ -29,10 +29,14 @@ RUN ln /usr/bin/php74 /usr/bin/php
 RUN chown -R apache:apache /var/www/html
 
 # ｐｈｐ７４−ｐｈｐ−ｆｐｍのサービス永続化
-RUN systemctl enable php74-php-fpm
+#RUN systemctl enable php74-php-fpm
 
 # apache サーバのサービス永続化
-RUN systemctl enable httpd 
+#RUN systemctl enable httpd 
 
 # 接続用ポートの穴あけ
 EXPOSE 8010
+
+ENTRYPOINT /usr/sbin/httpd -D FOREGROUND
+CMD ["apache2-foreground"]
+
