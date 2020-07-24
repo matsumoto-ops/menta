@@ -22,5 +22,7 @@ services:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress
+    ports:
+      - 8010:80
 volumes:
   db_data:
