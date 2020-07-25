@@ -1,5 +1,8 @@
 FROM php:7.2-fpm-alpine
 
+ARG AGENT_UID=1000
+RUN adduser -D -H -s /bin/sh -u ${AGENT_UID} wordpress
+
 # persistent dependencies
 RUN apk add --no-cache \
     # in theory, docker-entrypoint.sh is POSIX-compliant, but priority is a working, consistent image
@@ -89,6 +92,11 @@ RUN set -ex; \
     chmod -R 777 wp-content
 
 VOLUME /var/www/html
+RUN mkdir /var/run/php-fpm
+COPY ./php.ini /usr/local/etc/php/php.ini
+COPY ./www.conf /usr/local/etc/php-fpm.d/zzz-www.conf
+COPY ./httpd.conf /usr/local/apache24/conf/httpd.conf
+
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
