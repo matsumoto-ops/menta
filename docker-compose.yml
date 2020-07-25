@@ -11,6 +11,17 @@ services:
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db:3306
+      - PMA_USER=wordpress
+      - PMA_PASSWORD=wordpress
+    links:
+      - db
+    ports:
+      - "8000:80"
 
   wordpress:
     depends_on:
@@ -18,11 +29,16 @@ services:
     build:
       context: ./wordpress
       dockerfile: Dockerfile
+    restart: always
     environment:
-      WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: wordpress
+      - WORDPRESS_DB_HOST=db:3306
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_PASSWORD=wordpress
+      - WORDPRESS_DB_NAME=wordpressdb
     ports:
       - 8010:80
+    links:
+      - db
+
 volumes:
   db_data:
