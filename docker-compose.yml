@@ -37,6 +37,5 @@ services:
       - WORDPRESS_DB_NAME=wordpressdb
     links:
       - db
-
 volumes:
   db_data:
