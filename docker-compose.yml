@@ -30,6 +30,7 @@ services:
     build:
       context: ./wordpress
       dockerfile: Dockerfile
+    command: apachectl -D FOREGROUND
     environment:
       - WORDPRESS_DB_HOST=db:3306
       - WORDPRESS_DB_USER=wordpress
