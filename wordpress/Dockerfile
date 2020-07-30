@@ -41,6 +41,7 @@ COPY ./httpd.conf /usr/local/apache24/conf/httpd.conf
 COPY ./phpinfo.php /var/www/html
 
 COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod u+x /usr/local/bin/docker-entrypoint.sh
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["/usr/sbin/apache2", "-D",  "FOREGROUND"]
