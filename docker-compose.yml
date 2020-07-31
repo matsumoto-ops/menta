@@ -38,6 +38,8 @@ services:
       - WORDPRESS_DB_NAME=wordpress
     links:
       - db
+    volumes:
+      - ./src:/usr/src
     ports:
       - "8081:80"
 volumes:

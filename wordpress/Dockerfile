@@ -33,6 +33,11 @@ RUN apt-get install -y \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd exif
 
+RUN ls /usr/src/
+
+RUN tar -xzf /usr/src/wordpress.tar.gz -C /usr/src/; \
+    rm /usr/src/wordpress.tar.gz; 
+
 VOLUME /var/www/html
 RUN mkdir /var/run/php-fpm
 COPY ./php.ini /usr/local/etc/php/php.ini
