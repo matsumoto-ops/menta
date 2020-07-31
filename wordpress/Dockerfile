@@ -35,9 +35,6 @@ RUN apt-get install -y \
 
 RUN ls /usr/src/
 
-RUN tar -xzf /usr/src/wordpress.tar.gz -C /usr/src/; \
-    rm /usr/src/wordpress.tar.gz; 
-
 VOLUME /var/www/html
 RUN mkdir /var/run/php-fpm
 COPY ./php.ini /usr/local/etc/php/php.ini

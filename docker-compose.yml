@@ -39,7 +39,7 @@ services:
     links:
       - db
     volumes:
-      - ./src:/usr/src
+      - ./src/wordpress:/var/www/html
     ports:
       - "8081:80"
 volumes:
